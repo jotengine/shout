@@ -1,0 +1,15 @@
+<area shape="rect" href="$classFeaturePool.html#a5c677036c6a83444eb65b963c7e375f" title="FeaturePool::addSegment" alt="" coords="317,5,488,32">
+<area shape="rect" href="$classFeaturePool.html#4e7d4bfa4489ed0a7def6a26ec1e6897" title="FeaturePool::getFirstVectorFirstSegment" alt="" coords="273,56,532,83">
+<area shape="rect" href="$classFeaturePool.html#095ca925d176bed975f8bf086285b3c9" title="FeaturePool::getFirstVectorNextSegment" alt="" coords="273,107,532,133">
+<area shape="rect" href="$classPhoneModel.html#8a911011bcdb85e902876f8104820fa5" title="PhoneModel::getLogPDFProbability" alt="" coords="289,157,516,184">
+<area shape="rect" href="$classFeaturePool.html#b45d6c4737e91e3761fc54f9f9647b5c" title="FeaturePool::getNextVector" alt="" coords="312,208,493,235">
+<area shape="rect" href="$classFeaturePool.html#224dd69f82292fadb414403edf5c4563" title="FeaturePool::getSegmentID" alt="" coords="312,259,493,285">
+<area shape="rect" href="$classFeaturePool.html#a35c0036e264976f7138510aab69c82d" title="FeaturePool::resetSegmentation" alt="" coords="299,309,507,336">
+<area shape="rect" href="$classFeaturePool.html#d006ac79715763ace03627af6f17431a" title="FeaturePool::getFirstVectorFirstSegmentList" alt="" coords="581,56,861,83">
+<area shape="rect" href="$classFeaturePool.html#06b7dc277561d3ca0792b8a8f37011e3" title="FeaturePool::getVectorList" alt="" coords="909,56,1085,83">
+<area shape="rect" href="$classFeaturePool.html#b9a92d0aeddf3dde97b2469a214881f4" title="FeaturePool::getFirstVectorNextSegmentList" alt="" coords="581,107,861,133">
+<area shape="rect" href="$classMixGaussian.html#e0e58173c75b93e75fe0d0cd797aa5ac" title="MixGaussian::getLogP" alt="" coords="645,157,797,184">
+<area shape="rect" href="$classMixGaussian.html#8a94cd8be9810a1b9af97d45b24b4524" title="MixGaussian::dim" alt="" coords="935,107,1060,133">
+<area shape="rect" href="$classVector.html#a0978557568573ad6a4dd7d464971bc6" title="Vector::getVectorArray" alt="" coords="921,157,1073,184">
+<area shape="rect" href="$namespaceFastMath.html#52503617b4ae9fce99b06160ff974a38" title="FastMath::log" alt="" coords="947,208,1048,235">
+<area shape="rect" href="$classFeaturePool.html#9d59e90f53ceecbed3d3f45c4205d272" title="FeaturePool::getNextVectorList" alt="" coords="620,208,823,235">

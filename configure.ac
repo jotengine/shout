@@ -1,0 +1,10 @@
+AC_INIT(configure.ac)
+
+AM_CONFIG_HEADER(config.h)
+AM_INIT_AUTOMAKE(shout, 0.2)
+
+AC_LANG_CPLUSPLUS
+AC_PROG_CXX
+AC_PROG_RANLIB
+
+AC_OUTPUT(Makefile src/Makefile)

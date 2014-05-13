@@ -1,0 +1,6 @@
+<area shape="rect" href="$classPhoneModel.html#16ddfc6f5db37f02f69d363e7945c6b1" title="PhoneModel::writeModel" alt="" coords="300,31,463,57">
+<area shape="rect" href="$classPhoneModel.html#0a60f995588fa56fa9815035f3f9a7f6" title="PhoneModel::getNumberOfGaussians" alt="" coords="512,5,752,32">
+<area shape="rect" href="$classMixGaussian.html#9507bf90ec74136e151ecef9bbe52bf9" title="MixGaussian::storeData" alt="" coords="552,56,712,83">
+<area shape="rect" href="$classMixGaussian.html#b797fccd63c3dd6bbf1a6d3cfcc36ded" title="MixGaussian::getNumberOfGaussians" alt="" coords="801,5,1044,32">
+<area shape="rect" href="$classGaussian.html#66059a7d6b06ada196b92b0dc872e878" title="Gaussian::storeData" alt="" coords="853,56,992,83">
+<area shape="rect" href="$classVector.html#e6aa28a3a024fd2501dfd316ec74b61e" title="Vector::storeData" alt="" coords="1093,56,1216,83">

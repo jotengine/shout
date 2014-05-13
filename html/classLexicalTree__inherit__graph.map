@@ -1,0 +1,5 @@
+<area shape="rect" href="$classSegmenter.html" title="This class can determine which cluster a certain stream of feature vectors is closest..." alt="" coords="85,80,168,107">
+<area shape="rect" href="$classShout__dct2lextree.html" title="This class will translate a plain text pronunciation dictionary into a PPT stored..." alt="" coords="192,80,317,107">
+<area shape="rect" href="$classShoutSegment.html" title="ShoutSegment" alt="" coords="5,155,112,181">
+<area shape="rect" href="$classTrain__Segmenter.html" title="This class can &#39;train&#39; new speaker clusters. One could call determining the..." alt="" coords="136,155,256,181">
+<area shape="rect" href="$classAdapt__Segmenter.html" title="Adapt_Segmenter" alt="" coords="133,229,259,256">

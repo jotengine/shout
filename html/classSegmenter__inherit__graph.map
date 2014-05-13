@@ -1,0 +1,4 @@
+<area shape="rect" href="$classShoutSegment.html" title="ShoutSegment" alt="" coords="5,155,112,181">
+<area shape="rect" href="$classTrain__Segmenter.html" title="This class can &#39;train&#39; new speaker clusters. One could call determining the..." alt="" coords="136,155,256,181">
+<area shape="rect" href="$classLexicalTree.html" title="This class contains all lexical tree functionality and also almost all decoder steps..." alt="" coords="83,5,171,32">
+<area shape="rect" href="$classAdapt__Segmenter.html" title="Adapt_Segmenter" alt="" coords="133,229,259,256">

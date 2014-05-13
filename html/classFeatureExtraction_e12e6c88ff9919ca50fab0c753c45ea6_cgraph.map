@@ -1,0 +1,17 @@
+<area shape="rect" href="$classFeatureExtraction.html#a15017dfcd9a391f01217736ede42a6b" title="FeatureExtraction::calculateDelta" alt="" coords="279,72,492,99">
+<area shape="rect" href="$classVector.html#730800d75efb18753c6df540330f2e66" title="Vector::setValue" alt="" coords="580,21,695,48">
+<area shape="rect" href="$classVector.html#f2a4306cd00b9ea1539e7688b2023deb" title="Vector::divideElements" alt="" coords="560,629,715,656">
+<area shape="rect" href="$classVector.html#cf8fcb8e5533664ee03eaf6f2bf9ec18" title="Vector::sqrtElements" alt="" coords="313,541,457,568">
+<area shape="rect" href="$classVector.html#c065e56f8b5db8093289016d1dcabf43" title="Vector::substractElements" alt="" coords="549,528,725,555">
+<area shape="rect" href="$classGaussian.html#af6bdf166ad6f83243ae644651d8d6d3" title="Gaussian::trainFinish" alt="" coords="313,351,457,377">
+<area shape="rect" href="$classVector.html#655ea1b7c88bc1ac4abc406b81aa1df1" title="Vector::getValue" alt="" coords="793,173,908,200">
+<area shape="rect" href="$classVector.html#404404666ae6a250bd227c0a2b56fa3b" title="Vector::len" alt="" coords="969,427,1052,453">
+<area shape="rect" href="$classVector.html#5a9d755c2cd52d45dab09fb3924b5c32" title="Vector::Vector" alt="" coords="799,579,903,605">
+<area shape="rect" href="$classGaussian.html#ff5086463d6ba6de5202104c3a9013c8" title="Gaussian::calculateCP" alt="" coords="560,173,715,200">
+<area shape="rect" href="$namespaceFastMath.html#52503617b4ae9fce99b06160ff974a38" title="FastMath::log" alt="" coords="800,275,901,301">
+<area shape="rect" href="$classGaussian.html#6e47fb4a7c8333a56fd01ab4d68ad7fd" title="Gaussian::enterTrainingMode" alt="" coords="543,376,732,403">
+<area shape="rect" href="$classVector.html#06658e90211e89fee5633be129edddcb" title="Vector::setAllValues" alt="" coords="781,325,920,352">
+<area shape="rect" href="$classVector.html#ecccea9a9bc8764ae877c4f4b8ca4b6c" title="Vector::getDeterminant" alt="" coords="560,275,715,301">
+<area shape="rect" href="$classVector.html#910def32bdfac1b5625e5c3bedce4f6c" title="Vector::minimizeElements" alt="" coords="551,427,724,453">
+<area shape="rect" href="$classVector.html#003aaeb9799aacc44135927eed3c6675" title="Vector::multiplyElements" alt="" coords="555,477,720,504">
+<area shape="rect" href="$classGaussian.html#857664edb9d21bc3ca7e32783e0f9964" title="Gaussian::dim" alt="" coords="799,376,903,403">

@@ -1,0 +1,11 @@
+<area shape="rect" href="$classSegmenter.html#5aea7d0d9ec8320191e77a476f185d13" title="Segmenter::createLexicalTree" alt="" coords="288,157,483,184">
+<area shape="rect" href="$classLexicalTree.html#1002353f04ff5ab10ee0d47b6f9cf59f" title="LexicalTree::deleteTree" alt="" coords="556,81,711,108">
+<area shape="rect" href="$classLexicalTree.html#d79099cc5db0acadcc798a280df65733" title="LexicalTree::initialiseSystem" alt="" coords="540,132,727,159">
+<area shape="rect" href="$classPhoneModel.html#1542d72e7801698b4b3a67eb2f52f00c" title="PhoneModel::resetPhoneAdmin" alt="" coords="532,183,735,209">
+<area shape="rect" href="$classPhoneModel.html#b19fcacf0ed5edf7adc1fd703d39ec36" title="PhoneModel::setSilTrans" alt="" coords="551,233,716,260">
+<area shape="rect" href="$classLexicalTree.html#2d34e3b180c83b45e5af57edc1542533" title="LexicalTree::deleteLatticeAdmin" alt="" coords="789,5,995,32">
+<area shape="rect" href="$classLexicalTree.html#4858a4860118c196581325c42a48cddc" title="LexicalTree::deleteLookAheadList" alt="" coords="784,56,1000,83">
+<area shape="rect" href="$classLexicalTree.html#035edfe384bde9f753a202fc4a982cfe" title="LexicalTree::deleteNodes" alt="" coords="808,107,976,133">
+<area shape="rect" href="$classPhoneModel.html#14ea672b72ed10617c1aee2f490c5cc2" title="PhoneModel::initialiseToken" alt="" coords="1048,183,1232,209">
+<area shape="rect" href="$classPhoneModel.html#7adb4ff6a419b4144f0e4a3a7119b9b2" title="PhoneModel::initialisePhonePath" alt="" coords="1281,221,1492,248">
+<area shape="rect" href="$classLexicalTree.html#a3735612c4743a648679844ec1bffa01" title="LexicalTree::initialiseNode" alt="" coords="807,208,977,235">

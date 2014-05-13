@@ -1,0 +1,16 @@
+<area shape="rect" href="$classFeaturePool.html#4e7d4bfa4489ed0a7def6a26ec1e6897" title="FeaturePool::getFirstVectorFirstSegment" alt="" coords="287,5,545,32">
+<area shape="rect" href="$classFeaturePool.html#095ca925d176bed975f8bf086285b3c9" title="FeaturePool::getFirstVectorNextSegment" alt="" coords="287,56,545,83">
+<area shape="rect" href="$classFeaturePool.html#b45d6c4737e91e3761fc54f9f9647b5c" title="FeaturePool::getNextVector" alt="" coords="325,107,507,133">
+<area shape="rect" href="$classFeaturePool.html#224dd69f82292fadb414403edf5c4563" title="FeaturePool::getSegmentID" alt="" coords="325,157,507,184">
+<area shape="rect" href="$classMixGaussian.html#64938a70fda49b8e21f72d157ca8643c" title="MixGaussian::train" alt="" coords="351,208,481,235">
+<area shape="rect" href="$classFeaturePool.html#d006ac79715763ace03627af6f17431a" title="FeaturePool::getFirstVectorFirstSegmentList" alt="" coords="595,5,875,32">
+<area shape="rect" href="$classFeaturePool.html#06b7dc277561d3ca0792b8a8f37011e3" title="FeaturePool::getVectorList" alt="" coords="931,31,1107,57">
+<area shape="rect" href="$classFeaturePool.html#b9a92d0aeddf3dde97b2469a214881f4" title="FeaturePool::getFirstVectorNextSegmentList" alt="" coords="595,56,875,83">
+<area shape="rect" href="$classFeaturePool.html#9d59e90f53ceecbed3d3f45c4205d272" title="FeaturePool::getNextVectorList" alt="" coords="633,107,836,133">
+<area shape="rect" href="$classGaussian.html#7cf7ca138f6800b24660661bccfa1ed1" title="Gaussian::train" alt="" coords="680,208,789,235">
+<area shape="rect" href="$classVector.html#9fe5995f7a6a904db2d66f632bfd5a80" title="Vector::addElements" alt="" coords="948,183,1089,209">
+<area shape="rect" href="$classGaussian.html#6e47fb4a7c8333a56fd01ab4d68ad7fd" title="Gaussian::enterTrainingMode" alt="" coords="924,259,1113,285">
+<area shape="rect" href="$classVector.html#404404666ae6a250bd227c0a2b56fa3b" title="Vector::len" alt="" coords="1351,233,1433,260">
+<area shape="rect" href="$classVector.html#5a9d755c2cd52d45dab09fb3924b5c32" title="Vector::Vector" alt="" coords="1180,183,1284,209">
+<area shape="rect" href="$classGaussian.html#857664edb9d21bc3ca7e32783e0f9964" title="Gaussian::dim" alt="" coords="1180,284,1284,311">
+<area shape="rect" href="$classVector.html#06658e90211e89fee5633be129edddcb" title="Vector::setAllValues" alt="" coords="1163,335,1301,361">
