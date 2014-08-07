@@ -29,7 +29,7 @@ using namespace WriteFileLittleBigEndian;
 
 #define MAP_ADAPT_GAUSSIAN_RELEVANCE_FACTOR  (10.0)
 #define MMI_LAMBDA  (0.05)
-  
+
 /// \todo This was ment to be 'code efficient' but I need to get rid of it...
 int AUGMENTED_MATRIX_SIZE    =     (63960);
 int AUG_X                    =      (1640);
@@ -63,29 +63,29 @@ void Gaussian::printModel(FILE *fileMean, FILE *fileVariance)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-/// The constructor initialises the gaussian. The variance is set to 100 (very big), and the 
+/// The constructor initialises the gaussian. The variance is set to 100 (very big), and the
 /// mean is set to all zero.
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Gaussian::Gaussian(int dimensions)
-{ 
+{
   mmi_trainPars     = NULL;
   trainPars         = NULL;
   varianceVector    = new Vector(dimensions);
-  meanVector        = new Vector(dimensions);    
+  meanVector        = new Vector(dimensions);
   varianceVector->setAllValues(100.0);
   meanVector->setAllValues(0.0);
-  calculateCP();    
+  calculateCP();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-/// This constructor creates an identical copy from another Gaussian. 
+/// This constructor creates an identical copy from another Gaussian.
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Gaussian::Gaussian(Gaussian *copyFrom, bool shiftGaussian)
 {
   mmi_trainPars     = NULL;
-  trainPars         = NULL;  
+  trainPars         = NULL;
   varianceVector    = copyFrom->varianceVector->copyVector();
   meanVector        = copyFrom->meanVector->copyVector();
   if(shiftGaussian)
@@ -97,17 +97,17 @@ Gaussian::Gaussian(Gaussian *copyFrom, bool shiftGaussian)
     meanVector->addElements(true,v);
     delete v;
   }
-  calculateCP();  
+  calculateCP();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-/// This constructor creates a Gaussian with mean inbetween the mean of model1 and model2. 
+/// This constructor creates a Gaussian with mean inbetween the mean of model1 and model2.
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Gaussian::Gaussian(Gaussian *model1, Gaussian *model2, double rate)
 {
   mmi_trainPars     = NULL;
-  trainPars         = NULL;  
+  trainPars         = NULL;
   varianceVector    = model1->varianceVector->copyVector();
   meanVector        = model1->meanVector->copyVector();
   meanVector->multiplyElements(true,rate);
@@ -116,7 +116,7 @@ Gaussian::Gaussian(Gaussian *model1, Gaussian *model2, double rate)
   m2->multiplyElements(true,rate);
   meanVector->addElements(true,m2);
   delete m2;
-  calculateCP();  
+  calculateCP();
 }
 
 
@@ -139,14 +139,14 @@ Gaussian::Gaussian(FILE *inFile, int dim)
 
 Gaussian::~Gaussian()
 {
-  delete varianceVector; 
-  delete meanVector; 
+  delete varianceVector;
+  delete meanVector;
   if(trainPars != NULL)
   {
     if(trainPars->unAdaptedMeanVector != NULL)
     {
       delete trainPars->unAdaptedMeanVector;
-    }  
+    }
     delete trainPars->numeratorMean;
     delete trainPars->numeratorVariance;
     delete trainPars;
@@ -156,7 +156,7 @@ Gaussian::~Gaussian()
     if(mmi_trainPars->unAdaptedMeanVector != NULL)
     {
       delete mmi_trainPars->unAdaptedMeanVector;
-    }  
+    }
     delete mmi_trainPars->numeratorMean;
     delete mmi_trainPars->numeratorVariance;
     delete mmi_trainPars;
@@ -177,7 +177,7 @@ double Gaussian::getCoSim(Gaussian *g1, Gaussian *g2)
   delete v0;
   delete v1;
   delete v2;
-  return res;         
+  return res;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -192,7 +192,7 @@ double Gaussian::getKLDistance(Gaussian *g2)
   {
     dist = (meanVector->getValue(i) - g2->meanVector->getValue(i));
     res += (dist*dist / varianceVector->getValue(i));
-  }  
+  }
   return res;
 }
 
@@ -206,15 +206,15 @@ double Gaussian::getNormDistance()
   for(int i=0;i<meanVector->len();i++)
   {
     res += 1.0/varianceVector->getValue(i);
-  }  
+  }
   return res;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /// In order to safe memory, Gaussian training parameters are grouped in a TrainGaussian structure.
-/// Each Gaussian object contains a NULL pointer (trainPars) of type TrainGaussian. When a training 
+/// Each Gaussian object contains a NULL pointer (trainPars) of type TrainGaussian. When a training
 /// method is called and the trainPars variable is NULL, the method enterTrainingMode() is automatically
-/// called. This method will create the TrainGaussian structure and initialise its variables.  
+/// called. This method will create the TrainGaussian structure and initialise its variables.
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void Gaussian::enterTrainingMode(bool mmiTraining)
@@ -292,7 +292,7 @@ void Gaussian::storeSAT(FILE *outFile)
 void Gaussian::storeData(FILE *outFile)
 {
   meanVector->storeData(outFile);
-  varianceVector->storeData(outFile);  
+  varianceVector->storeData(outFile);
 }
 
 
@@ -304,7 +304,7 @@ void Gaussian::setVariance(const Vector *v)
 {
   // the call to setAllValues() below will check to make sure
   // the the sizes of the vectors are the same, so don't check here...
-  varianceVector->setAllValues(v);  
+  varianceVector->setAllValues(v);
   calculateCP();
 }
 
@@ -316,23 +316,23 @@ void Gaussian::setMean(Vector *v)
 {
   // the call to setAllValues() below will check to make sure
   // the the sizes of the vectors are the same, so don't check here...
-  meanVector->setAllValues(v);  
+  meanVector->setAllValues(v);
   calculateCP();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Calculates the CP and logCP. The CP is 1 devided by the square root from the determinant of 
+/// Calculates the CP and logCP. The CP is 1 devided by the square root from the determinant of
 /// the variance vector:
 ///
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void Gaussian::calculateCP(void)
-{ 
+{
   int len = varianceVector->len();
   CP = 0.0;
   for(int i=0;i<len;i++)
   {
-    CP += log(TWO_PI*varianceVector->getValue(i));    
+    CP += log(TWO_PI*varianceVector->getValue(i));
   }
   CP*=-0.5;
 }
@@ -342,7 +342,7 @@ void Gaussian::calculateCP(void)
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 double Gaussian::getP(Vector *observation)
-{   
+{
   double res = observation->calculateEPart(meanVector,varianceVector)+CP;
   if(res < MINIMUM_LOGP)
   {
@@ -356,7 +356,7 @@ double Gaussian::getP(Vector *observation)
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 double Gaussian::getLogP(Vector *observation)
-{   
+{
   double res = observation->calculateEPart(meanVector,varianceVector)+CP;
   if(res < MINIMUM_LOGP)
   {
@@ -366,7 +366,7 @@ double Gaussian::getLogP(Vector *observation)
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Returns the training denominator. This is basically the number of training observations used 
+/// Returns the training denominator. This is basically the number of training observations used
 /// during the training phase.
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -376,7 +376,7 @@ double Gaussian::getTrainingDenominator(void)
   {
     enterTrainingMode();
   }
-  return trainPars->lastTrainingWeight;  
+  return trainPars->lastTrainingWeight;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -435,7 +435,7 @@ void Gaussian::train(Gaussian *trainG)
 /// that an entire observation is added to the training pool. If 0.0 < factor < 1.0, the observation
 /// is seen as being partly mapped on this gaussian.
 ///
-/// Literature: Frederick Jelinek, "Statistical Methods for Speech Recognition": page 30 for 
+/// Literature: Frederick Jelinek, "Statistical Methods for Speech Recognition": page 30 for
 /// parameter (mean and variance) estimation.
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -481,12 +481,12 @@ void Gaussian::train(double factor, Vector *observation, Gaussian *doSat)
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Used to finish the training procedure.
 ///
-/// Literature: Frederick Jelinek, "Statistical Methods for Speech Recognition": page 30 for 
+/// Literature: Frederick Jelinek, "Statistical Methods for Speech Recognition": page 30 for
 /// parameter (mean and variance) estimation.
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 double Gaussian::trainFinish(bool cleanUp, double minVar)
-{ 
+{
   double denom = 0.0;
   if(trainPars == NULL)
   {
@@ -494,12 +494,12 @@ double Gaussian::trainFinish(bool cleanUp, double minVar)
   }
   denom = trainPars->trainingDenominator;
   if(denom > 0.0)
-  { 
+  {
     /* First the new mean: */
     delete(meanVector);
     meanVector = trainPars->numeratorMean->multiplyElements(false,(double)(1.0 / denom));
 
-    /* Now the new variance: */  
+    /* Now the new variance: */
     Vector *v = meanVector->multiplyElements(false,meanVector);
     delete(varianceVector);
     varianceVector = trainPars->numeratorVariance->multiplyElements(false,(double)(1.0 / denom));
@@ -526,7 +526,7 @@ double Gaussian::trainFinish(bool cleanUp, double minVar)
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void Gaussian::mapAdaptMean()
-{ 
+{
   double denom = 0.0;
   assert(trainPars != NULL);
   denom = trainPars->trainingDenominator;
@@ -557,7 +557,7 @@ void Gaussian::mapAdaptMean()
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /// The SMAPLR adaptation starts with creating one single cluster (node) at which all gaussians in
 /// the system will need to register. The method adapt_setInitialNode() will set the Gaussian in
-/// training mode (enterTrainingMode()) and add its mean vector to the training pool of the 
+/// training mode (enterTrainingMode()) and add its mean vector to the training pool of the
 /// adaptation cluster (Adapt_AM_TreeNode).
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -599,19 +599,19 @@ void Gaussian::adapt_setNode()
     }
     else
     {
-      trainPars->adaptNode = trainPars->adaptNode->childRight;    
+      trainPars->adaptNode = trainPars->adaptNode->childRight;
     }
     // Using the adaptation data weight as weight for clustering!
     trainPars->adaptNode->meanGaussian->train(trainPars->trainingDenominator,meanVector);
-//    trainPars->adaptNode->meanGaussian->train(1.0,meanVector);  
+//    trainPars->adaptNode->meanGaussian->train(1.0,meanVector);
     trainPars->adaptNode->denominator += trainPars->trainingDenominator;
   }
 }
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-/// This method adds its mean vector statistics to the helper matrix of the adaptation node it is 
-/// registered to.   
+/// This method adds its mean vector statistics to the helper matrix of the adaptation node it is
+/// registered to.
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void Gaussian::adapt_setHelperMatrices()
@@ -698,9 +698,9 @@ void Gaussian::adapt_setVarTrans()
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-/// The Gaussian object will adapt its mean Vector with use of the adaptation matrix that is 
+/// The Gaussian object will adapt its mean Vector with use of the adaptation matrix that is
 /// calculated by the Adapt_AM_TreeNode adaptation node that the Gaussian is registered to. The
-/// old mean Vector is kept in memory and can be restored by calling adapt_unAdapt(). 
+/// old mean Vector is kept in memory and can be restored by calling adapt_unAdapt().
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void Gaussian::adapt_adapt()
@@ -746,10 +746,10 @@ void Gaussian::adapt_adaptVar()
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-/// The Gaussian object will adapt its mean Vector with use of the adaptation matrix that is 
+/// The Gaussian object will adapt its mean Vector with use of the adaptation matrix that is
 /// calculated by the Adapt_AM_TreeNode adaptation node that the Gaussian is registered to when the
-/// method adapt_adapt() is called. The method adapt_unAdapt() will restore the old 
-/// mean Vector that is kept in memory. 
+/// method adapt_adapt() is called. The method adapt_unAdapt() will restore the old
+/// mean Vector that is kept in memory.
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void Gaussian::adapt_unAdapt()
@@ -917,7 +917,7 @@ void Gaussian::trainMMI(FILE *fileEnum, FILE *fileDenom)
           delete varNew;
         }
         meanNew = nMean->multiplyElements(false,denom);
-        /* Now the new variance: */  
+        /* Now the new variance: */
         Vector *v = meanNew->multiplyElements(false,meanNew);
         varNew = nVar->multiplyElements(false,denom);
         varNew->substractElements(true,v);
@@ -966,7 +966,7 @@ void Gaussian::printGaussian(void)
   printf("Means:\n");
   meanVector->printVector();
   printf("Variance:\n");
-  varianceVector->printVector();  
+  varianceVector->printVector();
 #endif
 }
 

@@ -26,6 +26,11 @@
 
 // #define NDEBUG
 
+#ifdef __APPLE__
+# define fopen64 fopen
+# define open64 open
+#endif
+
 #define SMALLEST_NEGATIVE            (-9.0e60)
 
 #define MAXSTR                       (1000)
@@ -73,13 +78,13 @@
   #define PRINTF6(a,b,c,d,e,f)  printf(a,b,c,d,e,f)
   #define PRINTF7(a,b,c,d,e,f,g)  printf(a,b,c,d,e,f,g)
 #else
-  #define PRINTF(a)         
-  #define PRINTF2(a,b)      
-  #define PRINTF3(a,b,c)    
-  #define PRINTF4(a,b,c,d)  
-  #define PRINTF5(a,b,c,d,e)  
-  #define PRINTF6(a,b,c,d,e,f)  
-  #define PRINTF7(a,b,c,d,e,f,g) 
+  #define PRINTF(a)
+  #define PRINTF2(a,b)
+  #define PRINTF3(a,b,c)
+  #define PRINTF4(a,b,c,d)
+  #define PRINTF5(a,b,c,d,e)
+  #define PRINTF6(a,b,c,d,e,f)
+  #define PRINTF7(a,b,c,d,e,f,g)
 #endif
 
 

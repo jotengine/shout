@@ -350,7 +350,7 @@ AUTOHEADER = autoheader
 AUTOMAKE = automake-1.14
 AWK = awk
 CPPFLAGS = 
-CXX = g++
+CXX = /usr/local/bin/g++-4.8
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -O3 -funroll-loops -mfpmath=sse -msse -msse2
 CYGPATH_W = echo
@@ -389,7 +389,7 @@ abs_builddir = /Users/skander/dev/shout/code/release/src
 abs_srcdir = /Users/skander/dev/shout/code/release/../src
 abs_top_builddir = /Users/skander/dev/shout/code/release
 abs_top_srcdir = /Users/skander/dev/shout/code/release/..
-ac_ct_CXX = g++
+ac_ct_CXX = 
 am__include = include
 am__leading_dot = .
 am__quote = 

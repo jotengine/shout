@@ -132,7 +132,7 @@ Whisper::Whisper(ShoutConfig *myConfig)
     myLM = NULL;
   }
 
-  FILE *modelFile = fopen(amName, "rb");
+  FILE *modelFile = fopen64(amName, "rb");
   if(modelFile==NULL)
   {
     USER_ERROR("No valid AM file passed!");
@@ -140,18 +140,18 @@ Whisper::Whisper(ShoutConfig *myConfig)
   FILE *backFile = NULL;
   if(strlen(backName) > 0)
   {
-    backFile = fopen(backName, "rb");
+    backFile = fopen64(backName, "rb");
     if(backFile==NULL)
     {
       USER_ERROR("No valid background DCT (lexical tree) file passed!");
     }
   }
-  FILE *rttmFile   = fopen(rttmName, "rb");
+  FILE *rttmFile   = fopen64(rttmName, "rb");
   if(rttmFile==NULL)
   {
     USER_ERROR("No valid META file passed!");
   }
-  FILE *lexFile = fopen(lexName, "rb");
+  FILE *lexFile = fopen64(lexName, "rb");
   if(lexFile==NULL)
   {
     USER_ERROR("No valid dictionary (lexical tree) file passed!");
@@ -159,7 +159,7 @@ Whisper::Whisper(ShoutConfig *myConfig)
 
   if(strlen(hypName) != 0)
   {
-    outFile = fopen(hypName,"wt");
+    outFile = fopen64(hypName,"wt");
   }
   if(outFile == NULL)
   {
@@ -290,7 +290,7 @@ Whisper::Whisper(ShoutConfig *myConfig)
   int segID = featurePool->claimSegmentationID();
   featurePool->readRTTM(segID,NULL,-1,-1,3,rttmFile);
   fclose(rttmFile);
-//  featurePool->setFeatureNormalization(CMVN_CLUSTER);
+ // featurePool->setFeatureNormalization(CMVN_CLUSTER);
   featurePool->createNewPool(rawName, histNormName, NULL, false, false, segID);
 
 
@@ -324,7 +324,7 @@ Whisper::Whisper(ShoutConfig *myConfig)
       strcat(latticeFile,"/");
       strcat(latticeFile,label);
       strcat(latticeFile,".shout-lattice");
-      FILE *latFile = fopen(latticeFile,"rt");
+      FILE *latFile = fopen64(latticeFile,"rt");
       if(latFile == NULL)
       {
         USER_ERROR2("Could not read from:",latticeFile);
@@ -383,7 +383,7 @@ Whisper::Whisper(ShoutConfig *myConfig)
       if(doAnalyse)
       {
         myLMLA = false;
-//        doPhoneAlignment = true;
+       // doPhoneAlignment = true;
         myTree->overwritePrunePars(PERFORM_PRUNING_HISTOGRAM,PERFORM_PRUNING_STATE,PERFORM_PRUNING_ENDSTATE,
                                   myBEAM*5.0, 1.0, 1.0, false, 1, 30000);
         myTree->overwriteWeightPars(1.0,0.0,0.0);
@@ -395,7 +395,7 @@ Whisper::Whisper(ShoutConfig *myConfig)
           myTree->processVector(feaVector,i);
         }
         myLMLA = true;
-//        doPhoneAlignment = false;
+       // doPhoneAlignment = false;
         myTree->overwritePrunePars(PERFORM_PRUNING_HISTOGRAM,PERFORM_PRUNING_STATE,PERFORM_PRUNING_ENDSTATE,
                                   myBEAM, mySTATE_BEAM, myEND_STATE_BEAM, myLMLA, myHISTOGRAM_STATE_PRUNING, myHISTOGRAM_PRUNING);
         myTree->overwriteWeightPars(myLM_SCALE,myTRANS_PENALTY,mySIL_PENALTY);
@@ -482,7 +482,7 @@ Whisper::Whisper(ShoutConfig *myConfig)
             latticeBaumWelchAlfa[offset+i2] /= Q[i];
           }
         }
- 
+
        // Backward pass:
         myTree->latticeBaumWelch_initBackward((double*)latticeBaumWelchBeta,length*numberOfStates);
         double resArray[numberOfNodes];
@@ -530,7 +530,7 @@ Whisper::Whisper(ShoutConfig *myConfig)
               posteriors[i2] /= normFact;
             }
             myTree->latticeBaumWelch_mmi_accumulatorsPosteriors(NULL,posteriors,numberOfStates,featurePool->getVector(&readPool_curSeg,time+i));
-//            myTree->latticeBaumWelch_printPosteriors(NULL,posteriors,i,numberOfStates,time);
+           // myTree->latticeBaumWelch_printPosteriors(NULL,posteriors,i,numberOfStates,time);
             int unmark = myTree->latticeBaumWelch_numberNodes(NULL,0,true);
             if(unmark != numberOfNodes)
             {
@@ -575,20 +575,20 @@ Whisper::Whisper(ShoutConfig *myConfig)
         if(doConfidence)
         {
           USER_ERROR("Sorry, not implemented right now!");
-/*          myPhoneLoopProb = new float[length];
-          myTree->setPhoneLoopConfidence(myPhoneLoopProb, time);        // For printing
-          myPhoneLoop->setPhoneLoopConfidence(myPhoneLoopProb, time);   // For filling
-  
-          myPhoneLoop->initialiseTree();
-          for(int i=0;i<length;i++)
-          {
-            Vector *feaVector = featurePool->getVector(time+i);
-            myPhoneLoop->processVector(feaVector,i);
-            myPhoneLoop->storePLConfidence(i);
-          }
-          myPhoneLoop->initialiseTree();*/
+          // myPhoneLoopProb = new float[length];
+          // myTree->setPhoneLoopConfidence(myPhoneLoopProb, time);        // For printing
+          // myPhoneLoop->setPhoneLoopConfidence(myPhoneLoopProb, time);   // For filling
+
+          // myPhoneLoop->initialiseTree();
+          // for(int i=0;i<length;i++)
+          // {
+          //   Vector *feaVector = featurePool->getVector(time+i);
+          //   myPhoneLoop->processVector(feaVector,i);
+          //   myPhoneLoop->storePLConfidence(i);
+          // }
+          // myPhoneLoop->initialiseTree();
         }
-  
+
         gettimeofday( &time2, NULL );
         int milliSec = (time2.tv_sec*1000 + time2.tv_usec/1000) - (time1.tv_sec*1000 + time1.tv_usec/1000);
         totMilliSec += milliSec;
@@ -613,7 +613,7 @@ Whisper::Whisper(ShoutConfig *myConfig)
           strcat(latticeFile,"/");
           strcat(latticeFile,label);
           strcat(latticeFile,".shout-lattice");
-          FILE *latFile = fopen(latticeFile,"wt");
+          FILE *latFile = fopen64(latticeFile,"wt");
           if(latFile == NULL)
           {
             USER_ERROR2("Could not write to:",latticeFile);
@@ -627,7 +627,7 @@ Whisper::Whisper(ShoutConfig *myConfig)
           strcat(latticeFile,"/");
           strcat(latticeFile,label);
           strcat(latticeFile,".txt");
-          FILE *latFile = fopen(latticeFile,"wt");
+          FILE *latFile = fopen64(latticeFile,"wt");
           if(latFile == NULL)
           {
             USER_ERROR2("Could not write to:",latticeFile);
@@ -668,16 +668,16 @@ Whisper::Whisper(ShoutConfig *myConfig)
   if(latticeTraining != NULL && strlen(latticeTraining) > 0)
   {
     strcpy(latticeFile,latticeTraining);
-/*    FILE *latFile = fopen(latticeFile,"rb");
-    if(latFile != NULL)
-    {
-      for(int i=0;i<numberOfClusteredModels;i++)
-      {
-        models[i]->addAccumulators(latFile);
-      }
-      fclose(latFile);
-    }*/
-    FILE *latFile = fopen(latticeFile,"wb");
+    // FILE *latFile = fopen64(latticeFile,"rb");
+    // if(latFile != NULL)
+    // {
+    //   for(int i=0;i<numberOfClusteredModels;i++)
+    //   {
+    //     models[i]->addAccumulators(latFile);
+    //   }
+    //   fclose(latFile);
+    // }
+    FILE *latFile = fopen64(latticeFile,"wb");
     for(int i=0;i<numberOfClusteredModels;i++)
     {
       models[i]->writeAccumulators(latFile);
@@ -757,7 +757,7 @@ int Whisper::getClusterID(FeaturePool *fPool)
       }
     }
   }
-//  printf("# debug: clusterID = %02d\n",bestID);
+ // printf("# debug: clusterID = %02d\n",bestID);
   return bestID;
 }
 
