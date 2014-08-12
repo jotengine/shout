@@ -20,7 +20,9 @@
 #ifndef SHOUTCONFIG_H
 #define SHOUTCONFIG_H
 
+#include <stdio.h>
 #include "stringlookup.h"
+#include "standard.h"
 
 /////////////////////////////////////// global:
 #define ARGUMENT_HELP           (0)

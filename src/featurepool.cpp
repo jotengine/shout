@@ -124,7 +124,7 @@ FeaturePool::FeaturePool(int nrStreams, FeaturePool_Multistream_file *files, dou
   fileType                   = FILE_TYPE_SHOUT; // The buffer is ours..
   buffer                     = new Vector*[poolLength];
   infoBlock.numberOfChannels = nrStreams;
-  infoBlock.lastComponent[0] = files[0].featurePool->getVectorSize() - 1; 
+  infoBlock.lastComponent[0] = files[0].featurePool->getVectorSize() - 1;
   for(int i=1;i<nrStreams;i++)
   {
     infoBlock.lastComponent[i] = infoBlock.lastComponent[i-1] + files[i].featurePool->getVectorSize();
@@ -185,7 +185,7 @@ void FeaturePool::createNewMultiStreamPool(FeaturePool_Multistream_file *files, 
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-/// This constructor initializes the pool, but it does not fill it with data. This can be done 
+/// This constructor initializes the pool, but it does not fill it with data. This can be done
 /// later with the addFeatures() method. This way of populating the pool is typically done when
 /// the size of the pool is not known beforhand (for example when collecting adaptation data).
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -298,7 +298,7 @@ FeaturePool::~FeaturePool()
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /// ///\todo Docs
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-  
+
 void FeaturePool::setStreamWeights(double *w, bool forEver)
 {
   for(int i=0;i<infoBlock.numberOfChannels;i++)
@@ -314,7 +314,7 @@ void FeaturePool::setStreamWeights(double *w, bool forEver)
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /// ///\todo Docs
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-  
+
 void FeaturePool::resetStreamWeights()
 {
   for(int i=0;i<infoBlock.numberOfChannels;i++)
@@ -333,7 +333,7 @@ void FeaturePool::createNewFeatureExtraction(char *featureFileName, double vtln,
   {
     case FILE_TYPE_RAW_DIARIZATION:
       featureNorm= DIARIZATION_DEFAULT_FEATURENORM;
-      feaExtract = new FeatureExtraction(featureFileName,NULL,DIARIZATION_DEFAULT_MFCC_NUMBER, 
+      feaExtract = new FeatureExtraction(featureFileName,NULL,DIARIZATION_DEFAULT_MFCC_NUMBER,
                                                           DIARIZATION_DEFAULT_MFCC_ENERGY,
                                                           DIARIZATION_DEFAULT_MFCC_ZEROCROSS,
                                                           DIARIZATION_DEFAULT_MFCC_DELTA,
@@ -346,7 +346,7 @@ void FeaturePool::createNewFeatureExtraction(char *featureFileName, double vtln,
 #ifdef HISTOGRAM_NORM_SPECTRUM
       feaExtract = new FeatureExtraction(featureFileName,NULL,DEFAULT_MEL_BANKLENGTH,0,0,0,1.0,ASR_DEFAULT_SQRT10,doOffset,onlyPrepare,true);
 #else
-      feaExtract = new FeatureExtraction(featureFileName,NULL,VTLN_DEFAULT_MFCC_NUMBER, 
+      feaExtract = new FeatureExtraction(featureFileName,NULL,VTLN_DEFAULT_MFCC_NUMBER,
                                                           VTLN_DEFAULT_MFCC_ENERGY,
                                                           VTLN_DEFAULT_MFCC_ZEROCROSS,
                                                           VTLN_DEFAULT_MFCC_DELTA,
@@ -357,7 +357,7 @@ void FeaturePool::createNewFeatureExtraction(char *featureFileName, double vtln,
       break;
     case FILE_TYPE_RAW_VTLN:
       featureNorm= VTLN_DEFAULT_FEATURENORM;
-      feaExtract = new FeatureExtraction(featureFileName,NULL,VTLN_DEFAULT_MFCC_NUMBER, 
+      feaExtract = new FeatureExtraction(featureFileName,NULL,VTLN_DEFAULT_MFCC_NUMBER,
                                                           VTLN_DEFAULT_MFCC_ENERGY,
                                                           VTLN_DEFAULT_MFCC_ZEROCROSS,
                                                           VTLN_DEFAULT_MFCC_DELTA,
@@ -367,9 +367,9 @@ void FeaturePool::createNewFeatureExtraction(char *featureFileName, double vtln,
       break;
     case FILE_TYPE_RAW_SAD:
       featureNorm= SAD_DEFAULT_FEATURENORM;
-      feaExtract = new FeatureExtraction(featureFileName,NULL,SAD_DEFAULT_MFCC_NUMBER, 
+      feaExtract = new FeatureExtraction(featureFileName,NULL,SAD_DEFAULT_MFCC_NUMBER,
                                                           SAD_DEFAULT_MFCC_ENERGY,
-                                                          SAD_DEFAULT_MFCC_ZEROCROSS, 
+                                                          SAD_DEFAULT_MFCC_ZEROCROSS,
                                                           SAD_DEFAULT_MFCC_DELTA,
                                                           vtln,
                                                           SAD_DEFAULT_SQRT10,
@@ -377,9 +377,9 @@ void FeaturePool::createNewFeatureExtraction(char *featureFileName, double vtln,
       break;
     case FILE_TYPE_RAW_DECODING:
       featureNorm= ASR_DEFAULT_FEATURENORM;
-      feaExtract = new FeatureExtraction(featureFileName,NULL,ASR_DEFAULT_MFCC_NUMBER, 
-                                                          ASR_DEFAULT_MFCC_ENERGY, 
-                                                          ASR_DEFAULT_MFCC_ZEROCROSS, 
+      feaExtract = new FeatureExtraction(featureFileName,NULL,ASR_DEFAULT_MFCC_NUMBER,
+                                                          ASR_DEFAULT_MFCC_ENERGY,
+                                                          ASR_DEFAULT_MFCC_ZEROCROSS,
                                                           ASR_DEFAULT_MFCC_DELTA,
                                                           vtln,
                                                           ASR_DEFAULT_SQRT10,
@@ -387,9 +387,9 @@ void FeaturePool::createNewFeatureExtraction(char *featureFileName, double vtln,
       break;
     case FILE_TYPE_RAW_SPKREC:
       featureNorm= SPKREC_DEFAULT_FEATURENORM;
-      feaExtract = new FeatureExtraction(featureFileName,NULL,SPKREC_DEFAULT_MFCC_NUMBER, 
-                                                          SPKREC_DEFAULT_MFCC_ENERGY, 
-                                                          SPKREC_DEFAULT_MFCC_ZEROCROSS, 
+      feaExtract = new FeatureExtraction(featureFileName,NULL,SPKREC_DEFAULT_MFCC_NUMBER,
+                                                          SPKREC_DEFAULT_MFCC_ENERGY,
+                                                          SPKREC_DEFAULT_MFCC_ZEROCROSS,
                                                           SPKREC_DEFAULT_MFCC_DELTA,
                                                           vtln,
                                                           SPKREC_DEFAULT_SQRT10,
@@ -656,7 +656,7 @@ void FeaturePool::createNewPool(char *featureFileName, char *histNormName, char 
               {
                 feaExtract->performClusterCMVNUntilFrame(timeSil,0);
               }
-  
+
               time = readPool_curSeg.curSeg->lastFrame;
               int normID = 0;
               while(normID < numberOfSpkIDs[vtlnSegID] && spkID[vtlnSegID][normID] != getSegmentID(0,&readPool_curSeg))
@@ -753,7 +753,7 @@ void FeaturePool::createNewPool(char *featureFileName, char *histNormName, char 
   {
     // Be aware: the following method MUST fill all entries OR make unfilled entries NULL.
     switch(fileType)
-    {  
+    {
       case FILE_TYPE_RAW_HISTOGRAM_NORM:
       case FILE_TYPE_RAW_DIARIZATION:
       case FILE_TYPE_RAW_SPKREC:
@@ -767,7 +767,7 @@ void FeaturePool::createNewPool(char *featureFileName, char *histNormName, char 
         fillBuffer_TextFormat(poolLength);
       break;
       case FILE_TYPE_SHOUT:  // this is the default:
-      default:        
+      default:
         buffer = new Vector*[poolLength];
         fillBuffer_ShoutFormat(poolLength);
       break;
@@ -842,7 +842,7 @@ void FeaturePool::maxSegmentLength(int segNr, int labelNr, int size, int minRema
 {
   assert(segNr >= 0 && segNr < MAX_NR_SEGMENTATIONS);
   assert(labelNr >= 0);
-  
+
   SegmentationList *seg = segList[segNr];
   while(seg != NULL)
   {
@@ -877,17 +877,17 @@ void FeaturePool::splitOnEnergy(int segNr, int sourceLabel, int silLabel, int so
   PRINTF("Now determine the NON-SPEECH split!\n");
   assert(segNr >= 0 && segNr < MAX_NR_SEGMENTATIONS);
   assert(sourceLabel >= 0);
-  
+
   double min     =  9.0e300;
   double max     = -9.0e300;
   double binSize = 0.0;
   int    bins[NR_SUBSET_BINS*2];
-  
+
   for(int i=0;i<NR_SUBSET_BINS*2;i++)
   {
     bins[i]   = 0;
   }
-  
+
   int    tot   = 0;
   SegmentationList *seg = segList[segNr];
   while(seg != NULL)
@@ -898,12 +898,12 @@ void FeaturePool::splitOnEnergy(int segNr, int sourceLabel, int silLabel, int so
     }
     seg = seg->next;
   }
-    
-  double meanSet[tot]; 
-  int    sizeSet[tot]; 
-  
+
+  double meanSet[tot];
+  int    sizeSet[tot];
+
   int curSet = 0;
-  seg = segList[segNr];  
+  seg = segList[segNr];
   while(seg != NULL)
   {
     double score   = 0.0;
@@ -928,23 +928,23 @@ void FeaturePool::splitOnEnergy(int segNr, int sourceLabel, int silLabel, int so
       curSet++;
     }
     seg = seg->next;
-  }     
+  }
   binSize = (max-min) / ((double)NR_SUBSET_BINS*2);
-  
+
   for(int i=0;i<tot;i++)
   {
     int index = ((int)((meanSet[i] - min) / binSize));
     if(index < 0)
     {
-      index = 0;      
+      index = 0;
     }
     if(index >= NR_SUBSET_BINS*2)
     {
       index = NR_SUBSET_BINS*2-1;
-    } 
-    bins[index]+=sizeSet[i];  
+    }
+    bins[index]+=sizeSet[i];
   }
-  
+
   int index = NR_SUBSET_BINS*2-1;
   int totS  = 0;
   while((totS < nrSamplesSound) && index > NR_SUBSET_BINS)
@@ -961,17 +961,17 @@ void FeaturePool::splitOnEnergy(int segNr, int sourceLabel, int silLabel, int so
     index++;
   }
   double maxProbSil = min + index*binSize;
-  
-  
+
+
   curSet = 0;
-  seg = segList[segNr];  
+  seg = segList[segNr];
   while(seg != NULL)
   {
     if(seg->ID[0] == sourceLabel)
     {
       if(meanSet[curSet] >= minProbSound)
       {
-        seg->ID[0] = soundLabel;      
+        seg->ID[0] = soundLabel;
       }
       else if(meanSet[curSet] <= maxProbSil)
       {
@@ -980,12 +980,12 @@ void FeaturePool::splitOnEnergy(int segNr, int sourceLabel, int silLabel, int so
       else
       {
         seg->ID[0] = 525;
-      }      
+      }
       curSet++;
     }
     seg = seg->next;
-  }     
-  
+  }
+
 
 
 
@@ -1002,8 +1002,8 @@ void FeaturePool::splitOnEnergy(int segNr, int sourceLabel, int silLabel, int so
   assert(segNr >= 0 && segNr < MAX_NR_SEGMENTATIONS);
   assert(sourceLabel >= 0);
   assert(destLabel >= 0);
-  
-  
+
+
   SegmentationList *seg = segList[segNr];
   int nrSeg   = 0;
   while(seg != NULL)
@@ -1014,8 +1014,8 @@ void FeaturePool::splitOnEnergy(int segNr, int sourceLabel, int silLabel, int so
     }
     seg = seg->next;
   }
-  seg = segList[segNr];  
-    
+  seg = segList[segNr];
+
   Vector *data[nrSeg];
   int curSeg = 0;
   while(seg != NULL)
@@ -1031,7 +1031,7 @@ void FeaturePool::splitOnEnergy(int segNr, int sourceLabel, int silLabel, int so
         tot++;
       }
       mean.multiplyElements(true,1.0/((double)tot));
-      data[curSeg] = mean.copyVector();    
+      data[curSeg] = mean.copyVector();
       curSeg++;
     }
     seg = seg->next;
@@ -1039,24 +1039,24 @@ void FeaturePool::splitOnEnergy(int segNr, int sourceLabel, int silLabel, int so
 
   if(threshold < -10.0)
   {
-    
+
     Gaussian *g1 = new Gaussian(bufferEnergy[0]->len());
-    
+
     for(int i=0;i<nrSeg;i++)
     {
       g1->train(1.0,data[i]);
     }
     g1->trainFinish();
-  
-      
+
+
     printf("Variance, mean: %f %f\n",g1->getVariance()->getValue(0),g1->getMean()->getValue(0));
-    
+
     Gaussian *g2 = new Gaussian(g1);
     Gaussian *g4 = new Gaussian(g1);
     Gaussian *g3 = new Gaussian(g1,false);
     g3->shiftMean();
     g1->shiftMean();
-    
+
     for(int it=0;it<10;it++)
     {
       for(int i=0;i<nrSeg;i++)
@@ -1086,10 +1086,10 @@ void FeaturePool::splitOnEnergy(int segNr, int sourceLabel, int silLabel, int so
     printf("Variance, mean: %f %f\n",g2->getVariance()->getValue(0),g2->getMean()->getValue(0));
     printf("Variance, mean: %f %f\n",g3->getVariance()->getValue(0),g3->getMean()->getValue(0));
     printf("Variance, mean: %f %f\n",g4->getVariance()->getValue(0),g4->getMean()->getValue(0));
-    
-    
+
+
     printf("SHOULD WE??: %f  %f  %f\n",g1->getKLDistance(g2), g2->getKLDistance(g1) ,g1->getKLDistance(g2) - g2->getKLDistance(g1));
-    
+
     if(true) //g1->getKLDistance(g2) - g2->getKLDistance(g1) > 0.5)
     {
       seg = segList[segNr];
@@ -1254,11 +1254,11 @@ double FeaturePool::getAverageEnergy(int segNr, int channelNr, double varianceFa
   channelNr--;
   assert(feaEnergy[channelNr].feaExtract != NULL);
   assert(segNr >= 0 && segNr < MAX_NR_SEGMENTATIONS);
-  
+
   // Assuming that energy has been added with addEnergyToFeatures if not there by default:
   int dimension = 0;
 
-  
+
   Gaussian meanG(feaEnergy[channelNr].buffer[0]->len());
   SegmentationList *seg = segList[segNr];
 
@@ -1314,7 +1314,7 @@ void FeaturePool::setFilter(char *featureFileName, int dimension, double thresho
     filter[i] = false;
     value[i]  = 0.0;
   }
-  int vectSize = vectorSize;  
+  int vectSize = vectorSize;
   if(fFile != NULL)
   {
     freadEndianSafe(&vectSize,1,sizeof(vectorSize),fFile);
@@ -1322,9 +1322,9 @@ void FeaturePool::setFilter(char *featureFileName, int dimension, double thresho
   }
   int i = 0;
   Gaussian meanG(vectSize);
-  
-  
-  
+
+
+
   Vector *v = buffer[0];
   while((i < poolLength) && (v != NULL) && (fFile == NULL || !feof(fFile)))
   {
@@ -1337,7 +1337,7 @@ void FeaturePool::setFilter(char *featureFileName, int dimension, double thresho
     if(fFile != NULL)
     {
       delete v;
-    }    
+    }
     i++;
     if(i<poolLength)
     {
@@ -1360,7 +1360,7 @@ void FeaturePool::setFilter(char *featureFileName, int dimension, double thresho
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void FeaturePool::addFeatureFile(char *featureFileName, FILE_TYPE fType, int ignoreFrames, int trainFrames, double vtln)
-{  
+{
 
   fileType = fType;
 
@@ -1368,7 +1368,7 @@ void FeaturePool::addFeatureFile(char *featureFileName, FILE_TYPE fType, int ign
   // Reading header information (extracting vector size and file length):
   int length = 0;
   switch(fileType)
-  { 
+  {
     case FILE_TYPE_RAW_HISTOGRAM_NORM:
     case FILE_TYPE_RAW_DIARIZATION:
     case FILE_TYPE_RAW_SPKREC:
@@ -1380,7 +1380,7 @@ void FeaturePool::addFeatureFile(char *featureFileName, FILE_TYPE fType, int ign
         delete feaExtract;
         feaExtract = NULL;
       }
-      createNewFeatureExtraction(featureFileName,vtln,false,false);      
+      createNewFeatureExtraction(featureFileName,vtln,false,false);
       length = feaExtract->getPoolSize();
       assert(vectorSize == feaExtract->getVectorSize());
     break;
@@ -1414,11 +1414,11 @@ void FeaturePool::addFeatureFile(char *featureFileName, FILE_TYPE fType, int ign
       ignoreFrames = 0;
     }
   }
-  
-  
+
+
   // Be aware: the following method MUST fill all entries OR make unfilled entries NULL.
   switch(fileType)
-  { 
+  {
     case FILE_TYPE_RAW_HISTOGRAM_NORM:
     case FILE_TYPE_RAW_DIARIZATION:
     case FILE_TYPE_RAW_SPKREC:
@@ -1426,13 +1426,13 @@ void FeaturePool::addFeatureFile(char *featureFileName, FILE_TYPE fType, int ign
     case FILE_TYPE_RAW_VTLN:
     case FILE_TYPE_RAW_SAD:
       fillBuffer_fromFeatureExtraction(trainFrames,ignoreFrames);
-    break; 
+    break;
     case FILE_TYPE_TEXT:
       fillBuffer_TextFormat(trainFrames,ignoreFrames);
       fclose(featureFile);
     break;
     case FILE_TYPE_SHOUT:  // this is the default:
-    default:        
+    default:
       fillBuffer_ShoutFormat(trainFrames,ignoreFrames);
       fclose(featureFile);
     break;
@@ -1536,9 +1536,9 @@ void FeaturePool::segmentationSubset(int sourceSegNr, int destSegNr, int useLabe
     tot++;
     trainVector = getFirstVectorNextSegment(&readPool_curSeg,useLabel < 0, &isLast, &inFilter);
   }
-  
-  double meanSet[tot]; 
-  int    sizeSet[tot]; 
+
+  double meanSet[tot];
+  int    sizeSet[tot];
   int curSet = 0;
   trainVector = getFirstVectorFirstSegment(&readPool_curSeg,sourceSegNr,useLabel,useLabel < 0, &isLast, &inFilter);
   while(trainVector != NULL)
@@ -1547,7 +1547,7 @@ void FeaturePool::segmentationSubset(int sourceSegNr, int destSegNr, int useLabe
     int    nrS   = 0;
     int contextKey = getSegmentID(TRAIN_CONTEXTKEY,&readPool_curSeg);
     if(inFilter)
-    {      
+    {
       score += model->getLogPDFProbability(contextKey,trainVector);
       nrS++;
     }
@@ -1569,23 +1569,23 @@ void FeaturePool::segmentationSubset(int sourceSegNr, int destSegNr, int useLabe
     mean += meanSet[curSet] / ((double)tot);
     curSet++;
     trainVector = getFirstVectorNextSegment(&readPool_curSeg,useLabel < 0, &isLast, &inFilter);
-  }   
+  }
   binSize = (max-mean) / ((double)NR_SUBSET_BINS);
-  
+
   for(int i=0;i<tot;i++)
   {
     int index = ((int)((meanSet[i] - mean) / binSize));
     if(index < 0)
     {
-      index = 0;      
+      index = 0;
     }
     if(index >= NR_SUBSET_BINS)
     {
       index = NR_SUBSET_BINS-1;
-    } 
+    }
     bins[index]+=sizeSet[i];
   }
-  
+
   int index = NR_SUBSET_BINS-1;
   int totS  = bins[index];
   while((totS < nrSamples) && index > 0)
@@ -1594,7 +1594,7 @@ void FeaturePool::segmentationSubset(int sourceSegNr, int destSegNr, int useLabe
     totS += bins[index];
   }
   double minProb = mean + index*binSize;
-  
+
   trainVector = getFirstVectorFirstSegment(&readPool_curSeg,sourceSegNr,useLabel,useLabel<0, &isLast, &inFilter);
   while(trainVector != NULL)
   {
@@ -1602,7 +1602,7 @@ void FeaturePool::segmentationSubset(int sourceSegNr, int destSegNr, int useLabe
     int nrS   = 0;
     int contextKey = getSegmentID(TRAIN_CONTEXTKEY,&readPool_curSeg);
     if(inFilter)
-    {      
+    {
       score += model->getLogPDFProbability(contextKey,trainVector);
       nrS++;
     }
@@ -1615,14 +1615,14 @@ void FeaturePool::segmentationSubset(int sourceSegNr, int destSegNr, int useLabe
         nrS++;
       }
     }
-    
+
     if(score/((double)nrS) > minProb)
     {
-      addSegment(destSegNr, readPool_curSeg.curSeg->firstFrame, readPool_curSeg.curSeg->lastFrame, readPool_curSeg.curSeg->ID[0], 
-                readPool_curSeg.curSeg->ID[TRAIN_CONTEXTKEY],readPool_curSeg.curSeg->ID[TRAIN_CONTEXTLEFT],readPool_curSeg.curSeg->ID[TRAIN_CONTEXTRIGHT]);    
+      addSegment(destSegNr, readPool_curSeg.curSeg->firstFrame, readPool_curSeg.curSeg->lastFrame, readPool_curSeg.curSeg->ID[0],
+                readPool_curSeg.curSeg->ID[TRAIN_CONTEXTKEY],readPool_curSeg.curSeg->ID[TRAIN_CONTEXTLEFT],readPool_curSeg.curSeg->ID[TRAIN_CONTEXTRIGHT]);
     }
     trainVector = getFirstVectorNextSegment(&readPool_curSeg,useLabel<0, &isLast, &inFilter);
-  }          
+  }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1674,7 +1674,7 @@ void FeaturePool::resetSegmentation(int segNr)
   }
   fillPool_curSeg[segNr] = NULL;
 }
-    
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Adds a segment in the current segmentation linked-list.
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1705,7 +1705,7 @@ void FeaturePool::addSegment(int segNr, int firstFrame, int lastFrame, int ID, i
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Adds a segment in the current segmentation linked-list at the very first slot. 
+/// Adds a segment in the current segmentation linked-list at the very first slot.
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void FeaturePool::addSegmentToFront(int segNr, int firstFrame, int lastFrame, int ID, int cKey, int cLeft, int cRight)
@@ -1762,7 +1762,7 @@ void FeaturePool::setCurSegmentVector(int segNr, int offset, Vector *vector)
   assert(offset >= 0 && time < fillPool_curSeg[segNr]->lastFrame);
   assert(vector != NULL);
   assert(buffer != NULL);
-  
+
   if(buffer[time] == NULL)
   {
     buffer[time] = new Vector(vectorSize);
@@ -1987,7 +1987,7 @@ Vector **FeaturePool::getVectorList(SegmentationAdmin *admin, int time)
 
 Vector **FeaturePool::getNextVectorList(SegmentationAdmin *admin, bool *isLastFromSegment, bool *inFilter)
 {
-  
+
   if(isLastFromSegment != NULL)
   {
     *isLastFromSegment = true;
@@ -2069,10 +2069,10 @@ Vector **FeaturePool::getFirstVectorFirstSegmentList(SegmentationAdmin *admin,in
     }
   }
   if(readPool_curSeg != NULL)
-  {    
+  {
     if(isLastFromSegment != NULL)
     {
-      *isLastFromSegment = ((readPool_curSeg->firstFrame == readPool_curSeg->lastFrame) || 
+      *isLastFromSegment = ((readPool_curSeg->firstFrame == readPool_curSeg->lastFrame) ||
                             (readPool_curSeg->firstFrame == restrictEnd));
     }
     if(inFilter != NULL && filterEnabled)
@@ -2219,12 +2219,12 @@ void FeaturePool::segmentationCopy(int sourceSegNr, int destSegNr)
   assert(destSegNr >= 0 && destSegNr < MAX_NR_SEGMENTATIONS);
 
   resetSegmentation(destSegNr);
-  
+
   SegmentationList *source = segList[sourceSegNr];
 
   while(source != NULL)
   {
-    addSegment(destSegNr, source->firstFrame, source->lastFrame, source->ID[0], 
+    addSegment(destSegNr, source->firstFrame, source->lastFrame, source->ID[0],
                             source->ID[TRAIN_CONTEXTKEY],source->ID[TRAIN_CONTEXTLEFT],source->ID[TRAIN_CONTEXTRIGHT]);
     source = source->next;
   }
@@ -2240,30 +2240,30 @@ void FeaturePool::segmentationSplit(int sourceSegNr, int destSegNr1, int destSeg
   assert(sourceSegNr >= 0 && sourceSegNr < MAX_NR_SEGMENTATIONS);
   assert(destSegNr1 >= 0 && destSegNr1 < MAX_NR_SEGMENTATIONS);
   assert(destSegNr2   >= 0 && destSegNr2   < MAX_NR_SEGMENTATIONS);
-  
+
   resetSegmentation(destSegNr1);
   resetSegmentation(destSegNr2);
-  
+
   SegmentationList *source = segList[sourceSegNr];
 
   while(source != NULL)
   {
     int firstFrame1 = source->firstFrame;
     int lastFrame2  = source->lastFrame;
-    int lastFrame1  = firstFrame1 + (lastFrame2 - firstFrame1 + 1) / 2 - 1;    
+    int lastFrame1  = firstFrame1 + (lastFrame2 - firstFrame1 + 1) / 2 - 1;
     int firstFrame2 = lastFrame1 + 1;
 
     // If the two new segments are too short, just leave it one segment:
     if((lastFrame1 >= lastFrame2) || (firstFrame2 <= firstFrame1))
     {
-      addSegment(destSegNr1, firstFrame1, lastFrame2, source->ID[0], 
+      addSegment(destSegNr1, firstFrame1, lastFrame2, source->ID[0],
                             source->ID[TRAIN_CONTEXTKEY],source->ID[TRAIN_CONTEXTLEFT],source->ID[TRAIN_CONTEXTRIGHT]);
     }
     else
     {
-      addSegment(destSegNr1, firstFrame1, lastFrame1, source->ID[0], 
+      addSegment(destSegNr1, firstFrame1, lastFrame1, source->ID[0],
                             source->ID[TRAIN_CONTEXTKEY],source->ID[TRAIN_CONTEXTLEFT],source->ID[TRAIN_CONTEXTRIGHT]);
-      addSegment(destSegNr2, firstFrame2, lastFrame2, source->ID[0], 
+      addSegment(destSegNr2, firstFrame2, lastFrame2, source->ID[0],
                             source->ID[TRAIN_CONTEXTKEY],source->ID[TRAIN_CONTEXTLEFT],source->ID[TRAIN_CONTEXTRIGHT]);
     }
     source = source->next;
@@ -2281,9 +2281,9 @@ void FeaturePool::segmentationIntersection(int sourceSegNr, int filterSegNr, int
   assert(sourceSegNr >= 0 && sourceSegNr < MAX_NR_SEGMENTATIONS);
   assert(filterSegNr >= 0 && filterSegNr < MAX_NR_SEGMENTATIONS);
   assert(destSegNr   >= 0 && destSegNr   < MAX_NR_SEGMENTATIONS);
-  
+
   resetSegmentation(destSegNr);
-  
+
   SegmentationList *source = segList[sourceSegNr];
   SegmentationList *filter = segList[filterSegNr];
 
@@ -2301,7 +2301,7 @@ void FeaturePool::segmentationIntersection(int sourceSegNr, int filterSegNr, int
     }
     if((firstFrame < lastFrame) && (filterLabel < 0 || filter->ID[0] == filterLabel))
     {
-      addSegment(destSegNr, firstFrame, lastFrame, source->ID[0], 
+      addSegment(destSegNr, firstFrame, lastFrame, source->ID[0],
                             source->ID[TRAIN_CONTEXTKEY],source->ID[TRAIN_CONTEXTLEFT],source->ID[TRAIN_CONTEXTRIGHT]);
     }
     if(source->lastFrame < filter->lastFrame)
@@ -2311,7 +2311,7 @@ void FeaturePool::segmentationIntersection(int sourceSegNr, int filterSegNr, int
     else
     {
       filter = filter->next;
-    }    
+    }
   }
 }
 
@@ -2364,9 +2364,9 @@ void FeaturePool::segmentationSubstract(int sourceSegNr, int filterSegNr, int de
   assert(sourceSegNr >= 0 && sourceSegNr < MAX_NR_SEGMENTATIONS);
   assert(filterSegNr >= 0 && filterSegNr < MAX_NR_SEGMENTATIONS);
   assert(destSegNr   >= 0 && destSegNr   < MAX_NR_SEGMENTATIONS);
-  
+
   resetSegmentation(destSegNr);
-  
+
   SegmentationList *source = segList[sourceSegNr];
   SegmentationList *filter = segList[filterSegNr];
 
@@ -2402,7 +2402,7 @@ void FeaturePool::segmentationSubstract(int sourceSegNr, int filterSegNr, int de
   {
     if(!newSet[i] && firstFrame >= 0)
     {
-      addSegment(destSegNr, firstFrame, i, source->ID[0], 
+      addSegment(destSegNr, firstFrame, i, source->ID[0],
                               source->ID[TRAIN_CONTEXTKEY],source->ID[TRAIN_CONTEXTLEFT],source->ID[TRAIN_CONTEXTRIGHT]);
       firstFrame = -1;
     }
@@ -2415,7 +2415,7 @@ void FeaturePool::segmentationSubstract(int sourceSegNr, int filterSegNr, int de
       firstFrame = i;
     }
     i++;
-  }  
+  }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2440,7 +2440,7 @@ void FeaturePool::mergeLabels(int segNr, int label1, int label2)
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Prints the current segmentation in RTTM format to the screen (outFile = NULL), or to a file.
 /// The label is placed as label in each line, the prefix is added to the segment ID.
-/// If nrPr is > 0, the prefix string contains all speaker labels, it is supposed to 
+/// If nrPr is > 0, the prefix string contains all speaker labels, it is supposed to
 /// be nrSpeakers*nrPr long..
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2560,7 +2560,7 @@ void FeaturePool::segmentationWiden(int segNr, int soundNr, int maxNrFrames, int
       seg->firstFrame = 0;
     }
   }
-  
+
   while(seg != NULL)
   {
     if(seg->next != NULL)
@@ -2576,7 +2576,7 @@ void FeaturePool::segmentationWiden(int segNr, int soundNr, int maxNrFrames, int
         else if((seg->next->ID[0] == soundNr) || (seg->ID[0] == soundNr))
         {
           add = length;
-        }      
+        }
       }
       else
       {
@@ -2605,24 +2605,24 @@ void FeaturePool::segmentationWiden(int segNr, int soundNr, int maxNrFrames, int
       }
     }
     seg = seg->next;
-  }  
+  }
   // The last segment is out of luck. It will not get widened.
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Filter a label-seq in a segmentation so that short segments of maximum duration maxSelf
-/// neighbouring (identical) long segments of minimum duration minNeighbours are merged into the 
+/// neighbouring (identical) long segments of minimum duration minNeighbours are merged into the
 /// neighbouring label.
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void FeaturePool::filterShortSegments(int segID, int labelNr, int labelSelf, int minNeighbours)
 {
-  SegmentationList *seg  = segList[segID];  
+  SegmentationList *seg  = segList[segID];
   SegmentationList *prev = NULL;
 
   int length;
   int prevLength = minNeighbours+1;
-  
+
   while(seg != NULL)
   {
     length = seg->lastFrame - seg->firstFrame + 1;
@@ -2649,8 +2649,8 @@ void FeaturePool::filterShortSegments(int segID, int labelNr, int labelSelf, int
 int FeaturePool::filterLongSegments(int segID, int labelNr, int newLabel, int minLength)
 {
   int nrChanges = 0;
-  SegmentationList *seg  = segList[segID];  
- 
+  SegmentationList *seg  = segList[segID];
+
   while(seg != NULL)
   {
     int length = seg->lastFrame - seg->firstFrame + 1;
@@ -2677,7 +2677,7 @@ int FeaturePool::filterLongSegments(int segID, int labelNr, int newLabel, int mi
 /// If fillerID > 0, all gaps in the segmentation are filled with segments of fillerID ID.
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void FeaturePool::readRTTM(int segmentationNr, char *mapCluster, int mapNr, int strLen, int prefixLength, FILE *inSegFile, 
+void FeaturePool::readRTTM(int segmentationNr, char *mapCluster, int mapNr, int strLen, int prefixLength, FILE *inSegFile,
                            int fillerID, int ignoreFrames, int trainFrames, char *labelName)
 {
   if(multiStream != NULL)
@@ -2698,7 +2698,7 @@ void FeaturePool::readRTTM(int segmentationNr, char *mapCluster, int mapNr, int 
   }
   if(fileOffset == 0)
   {
-    resetSegmentation(segmentationNr);    
+    resetSegmentation(segmentationNr);
   }
   else
   {
@@ -2717,7 +2717,7 @@ void FeaturePool::readRTTM(int segmentationNr, char *mapCluster, int mapNr, int 
   char *label;
 
   int  lastFrame         = fileOffset;
-  bool passedTrainFrames = false; 
+  bool passedTrainFrames = false;
   while(!feof(inSegFile) && !passedTrainFrames)
   {
     if(fgets(line,MAXSTR,inSegFile) != NULL)
@@ -2764,9 +2764,9 @@ void FeaturePool::readRTTM(int segmentationNr, char *mapCluster, int mapNr, int 
           {
             seg->lastFrame = trainFrames-1;
             passedTrainFrames = true;
-          } 
+          }
           if(seg->firstFrame >= trainFrames)
-          {          
+          {
             delete seg;
             passedTrainFrames = true;
           }
@@ -2774,7 +2774,7 @@ void FeaturePool::readRTTM(int segmentationNr, char *mapCluster, int mapNr, int 
           {
             seg->firstFrame += fileOffset;
             seg->lastFrame  += fileOffset;
-  
+
             splitList(subline,line);  // <NA> is in subline
             splitList(line,subline);  // <NA> is in line
             splitList(subline,line);  // label is in subline
@@ -2796,7 +2796,7 @@ void FeaturePool::readRTTM(int segmentationNr, char *mapCluster, int mapNr, int 
               }
               if(i>=mapNr)
               {
-                USER_ERROR2("Unkown label in RTTM file:",label);
+                USER_ERROR2("Unknown label in RTTM file:",label);
               }
               else
               {
@@ -2817,7 +2817,7 @@ void FeaturePool::readRTTM(int segmentationNr, char *mapCluster, int mapNr, int 
             {
               if(numberOfSpkIDs[segmentationNr] >= MAX_NR_SPKIDS)
               {
-                USER_ERROR("Sorry, because of a stupid implementation choise, it is not possible to have more than 10000 speakers in your RTTM.");
+                USER_ERROR("Sorry, because of a stupid implementation choice, it is not possible to have more than 10000 speakers in your RTTM.");
               }
               spkID[segmentationNr][numberOfSpkIDs[segmentationNr]] = seg->ID[0];
               numberOfSpkIDs[segmentationNr]++;
@@ -2870,7 +2870,7 @@ void FeaturePool::readRTTM(int segmentationNr, char *mapCluster, int mapNr, int 
   {
     if(list->lastFrame >= poolLength)
     {
-      list->lastFrame = poolLength - 1;      
+      list->lastFrame = poolLength - 1;
     }
   }
 }
@@ -2883,7 +2883,7 @@ void FeaturePool::segmentationAddLabel(int sourceSegNr, int destSegNr, int sourc
 {
   assert(sourceSegNr >= 0 && sourceSegNr < MAX_NR_SEGMENTATIONS);
   assert(destSegNr >= 0 && destSegNr < MAX_NR_SEGMENTATIONS);
-  
+
   SegmentationList *source = segList[sourceSegNr];
   SegmentationList *dest   = segList[destSegNr];
 
@@ -2919,10 +2919,10 @@ void FeaturePool::segmentationAddLabel(int sourceSegNr, int destSegNr, int sourc
       }
       destPrev = add;
       source = source->next;
-    }  
+    }
   }
-  
-  // Now the first frame in 
+
+  // Now the first frame in
   while(source != NULL && dest != NULL)
   {
     while(source != NULL && source->ID[0] != sourceLabel)
@@ -2946,10 +2946,10 @@ void FeaturePool::segmentationAddLabel(int sourceSegNr, int destSegNr, int sourc
       add->lastFrame  = source->lastFrame;
       add->next       = dest->next;
       dest->next      = add;
-      
-      dest   = dest->next;      
+
+      dest   = dest->next;
       source = source->next;
-    }    
+    }
   }
 }
 
@@ -2976,7 +2976,7 @@ int FeaturePool::mergeSegmentations(int *seg, int nrSeg, int outSeg)
       }
     }
   }
-  SegmentationList *mergeList[nrSeg];  
+  SegmentationList *mergeList[nrSeg];
   for(int i=0;i<nrSeg;i++)
   {
     mergeList[i] = segList[seg[i]];
@@ -2987,7 +2987,7 @@ int FeaturePool::mergeSegmentations(int *seg, int nrSeg, int outSeg)
     for(int i2=0;i2<4;i2++)
     {
       key[i2] = 0;
-    }    
+    }
     bool allKeyZero = true;
     for(int i2=0;i2<nrSeg;i2++)
     {
@@ -3001,7 +3001,7 @@ int FeaturePool::mergeSegmentations(int *seg, int nrSeg, int outSeg)
       }
       else
       {
-        allKeyZero = false;        
+        allKeyZero = false;
         key[i2]    = mergeList[i2]->ID[0];
       }
     }
@@ -3022,8 +3022,8 @@ int FeaturePool::mergeSegmentations(int *seg, int nrSeg, int outSeg)
   {
     totals[mergeFilter[i]]++;
   }
-  
-  
+
+
   resetSegmentation(outSeg);
   int mapSpkr[nrSpkrs];
   int lowSpkr = 1;
@@ -3066,7 +3066,7 @@ int FeaturePool::mergeSegmentations(int *seg, int nrSeg, int outSeg)
   {
     addSegment(outSeg,oldTime,poolLength-1,mapSpkr[active]);
   }
-  
+
   for(int i=0;i<nrSpkrs;i++)
   {
     PRINTF4("Nr frames for speaker SPK%02d: %12d (%d)\n",i,totals[i],mapSpkr[i]);
@@ -3112,7 +3112,7 @@ void FeaturePool::concatSegmentation(int destSeg, int copySeg)
   fillPool_curSeg[copySeg] = NULL;
   segList[copySeg]         = NULL;
 }
-    
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /// \todo Docs
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3125,7 +3125,7 @@ void FeaturePool::restrictPool(int start, int end)
     restrictEnd   = poolLength - 1;
   }
   else
-  {  
+  {
     restrictStart = start;
     restrictEnd   = end;
     if(restrictEnd > poolLength - 1)
@@ -3141,7 +3141,7 @@ void FeaturePool::restrictPool(int start, int end)
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool FeaturePool::createUEMSegmentation(int segID, int channelNumber, char *label, char *UEM)
-{ 
+{
   resetSegmentation(segID);
   bool res = false;
   char filter[MAXSTR];

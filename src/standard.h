@@ -67,7 +67,7 @@
 
 #define WELCOME_HEADER2 "############################################################################\n"
 
-// #define DEBUG_ON
+#define DEBUG_ON
 
 #ifdef DEBUG_ON
   #define PRINTF(a)           printf(a)

@@ -147,8 +147,8 @@ PRINTF("Done!\n");fflush(stdout);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Handles the command parameters for ShoutSegment. It is the main function of the 
-/// shout_segment application. 
+/// Handles the command parameters for ShoutSegment. It is the main function of the
+/// shout_segment application.
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 int main(int argc, char *argv[])
@@ -157,7 +157,7 @@ int main(int argc, char *argv[])
 
   FILE *modelFile = fopen(myConfig.getStringValue(ARGUMENT_AM_SEGMENT),"rb");
 
-  if(( myConfig.parIsDefined(ARGUMENT_CTS_IN) && !myConfig.parIsDefined(ARGUMENT_CTS_OUT)) || 
+  if(( myConfig.parIsDefined(ARGUMENT_CTS_IN) && !myConfig.parIsDefined(ARGUMENT_CTS_OUT)) ||
      (!myConfig.parIsDefined(ARGUMENT_CTS_IN) &&  myConfig.parIsDefined(ARGUMENT_CTS_OUT)))
   {
     USER_ERROR("For CTS segmentation, define the second input AND second output file.");
@@ -250,10 +250,10 @@ ShoutSegment::ShoutSegment(char *featureFile, FILE *amFile, char *rttmOut, char 
     featurePool->addSegment(id,0,featurePool->getPoolLength()-1,1,1,1,1);
     featurePool->removeLowEnergy(id,1,true);
 
-//     int id2 = featurePool->claimSegmentationID();
-//     featurePool->addSegment(id2,0,featurePool->getPoolLength()-1,0);
-//     int id3 = featurePool->claimSegmentationID();
-//     featurePool->segmentationSubstract(id2,id,id3);
+    // int id2 = featurePool->claimSegmentationID();
+    // featurePool->addSegment(id2,0,featurePool->getPoolLength()-1,0);
+    // int id3 = featurePool->claimSegmentationID();
+    // featurePool->segmentationSubstract(id2,id,id3);
 
     // Done. Let's write to file...
     FILE *rttm = fopen(rttmOut,"wt");
@@ -319,40 +319,40 @@ ShoutSegment::ShoutSegment(char *featureFile, FILE *amFile, char *rttmOut, char 
       featurePool->resetSegmentation(uemID);
       featurePool->addSegment(uemID,0,featurePool->getPoolLength()-1,0);
     }
-    
+
     int finalID    = featurePool->claimSegmentationID();
     int segID      = featurePool->claimSegmentationID();
     int silID      = featurePool->claimSegmentationID();
     int speechID   = featurePool->claimSegmentationID();
     int garID      = featurePool->claimSegmentationID();
     int tempID     = featurePool->claimSegmentationID();
-  
+
     featurePool->resetSegmentation(finalID);
-    
+
     if(numberOfPhones != 3)
     {
       USER_ERROR("The acoustic model file must contain two models: SIL and SPEECH!");
     }
-    
+
     for(int i=1;i<numberOfPhones;i++)
     {
       PRINTF4("Model %d (%d gaussians): %s\n",i,phoneModels[i]->getNumberOfGaussians(),phoneModels[i]->getStatistics()->name);
     }
-    
+
     PhoneModel *orgSil     = phoneModels[1];
     PhoneModel *orgSpeech  = phoneModels[2];
-  
+
     delete[] phoneModels;
     numberOfClusters = 3;
     numberOfPhones   = 4;
     phoneModels      = new PhoneModel*[4];
-    phoneModels[0]   = NULL;  
-    phoneModels[1]   = orgSil;  
-    phoneModels[2]   = orgSpeech;  
-    phoneModels[3]   = NULL;  
+    phoneModels[0]   = NULL;
+    phoneModels[1]   = orgSil;
+    phoneModels[2]   = orgSpeech;
+    phoneModels[3]   = NULL;
     createLexicalTree(100, forEachModel1, NULL);
-  
-  
+
+
     // Splitting in SEGMENT_WINDOWSIZE samples (approx)...
     int totalLength = 0;
     int chunkLength = 0;
@@ -368,10 +368,10 @@ ShoutSegment::ShoutSegment(char *featureFile, FILE *amFile, char *rttmOut, char 
     {
       nrChunks++;
     }
-    chunkLength = totalLength / nrChunks + 1;  
-    
+    chunkLength = totalLength / nrChunks + 1;
+
     // Now find the other positions:
-    
+
     int i     = 0;
     int count = 0;
     featurePool->resetSegmentation(tempID);
@@ -395,7 +395,7 @@ ShoutSegment::ShoutSegment(char *featureFile, FILE *amFile, char *rttmOut, char 
           tot   += (length - ind);
           count += (length - ind);
           ind    = length;
-        } 
+        }
         else
         {
           int lframe = tot+(chunkLength - count)-1;
@@ -419,10 +419,10 @@ ShoutSegment::ShoutSegment(char *featureFile, FILE *amFile, char *rttmOut, char 
       }
       vector = featurePool->getFirstVectorNextSegment(&segmentList,false);
     }
-  
+
     featurePool->resetSegmentation(uemID);
     featurePool->segmentationCopy(tempID,uemID);
-    
+
     // Just some logging:
     vector = featurePool->getFirstVectorFirstSegment(&segmentList, uemID,-1,true);
     while(vector != NULL)
@@ -433,7 +433,7 @@ ShoutSegment::ShoutSegment(char *featureFile, FILE *amFile, char *rttmOut, char 
       PRINTF4("UEM: Start: %d End: %d ID: %d\n",tot,tot+length-1,id);
       vector = featurePool->getFirstVectorNextSegment(&segmentList,true);
     }
-    PRINTF2("Number of chunks: %d\n",nrChunks); 
+    PRINTF2("Number of chunks: %d\n",nrChunks);
     PRINTF2("Chunk size      : %d\n",chunkLength);
     PRINTF2("Pool length     : %d\n",featurePool->getPoolLength());
 
@@ -485,9 +485,9 @@ ShoutSegment::ShoutSegment(char *featureFile, FILE *amFile, char *rttmOut, char 
             featurePool->splitOnEnergy(segID,1,1,3,(i+1)*SAMPLE_PER_GAUSSIAN,5*SAMPLE_PER_GAUSSIAN,ENERGY_COMP);
             featurePool->splitOnEnergy(segID,3,0,3,SAMPLE_PER_GAUSSIAN,(i+1)*SAMPLE_PER_GAUSSIAN,ZEROCROSS_COMP);
           }
-          featurePool->segmentationCopy(segID,garID);      
-          featurePool->segmentationCopy(segID,silID);      
-  //        featurePool->segmentationSubset(segID,silID,1,phoneModels[1],(i+1)*SAMPLE_PER_GAUSSIAN);
+          featurePool->segmentationCopy(segID,garID);
+          featurePool->segmentationCopy(segID,silID);
+         // featurePool->segmentationSubset(segID,silID,1,phoneModels[1],(i+1)*SAMPLE_PER_GAUSSIAN);
 
           garSize = featurePool->getClusterLength(garID,3);
           silSize = featurePool->getClusterLength(silID,1);
@@ -515,7 +515,7 @@ ShoutSegment::ShoutSegment(char *featureFile, FILE *amFile, char *rttmOut, char 
             garbageModel->setTrainingData(featurePool,garID,3);
             trainModel(garbageModel,garG,true);
           }
-    
+
           phoneModels[1] = ((PhoneModel*)silModel);
           phoneModels[3] = ((PhoneModel*)garbageModel);
 
@@ -528,17 +528,17 @@ ShoutSegment::ShoutSegment(char *featureFile, FILE *amFile, char *rttmOut, char 
             garG+=2;
           }
         }
-        
+
         featurePool->segmentationCopy(segID,silID);
         featurePool->resetSegmentation(garID);
         featurePool->segmentationIntersection(silID,speechID,2,garID);
-        
+
         if(featurePool->getClusterLength(garID,2) > MIN_DATA)
         {
           featurePool->resetSegmentation(segID);
           featurePool->segmentationCopy(garID,segID);
           featurePool->resetSegmentation(garID);
-          
+
           if(speechModel != NULL)
           {
             delete speechModel;
@@ -548,19 +548,19 @@ ShoutSegment::ShoutSegment(char *featureFile, FILE *amFile, char *rttmOut, char 
           trainModel(speechModel,speechG,true);
           phoneModels[2] = ((PhoneModel*)speechModel);
           createLexicalTree(100, forEachModel1, NULL);
-          
+
           featurePool->resetSegmentation(segID);
-          segmentFeaturePool(uemID,chunks,segID);    
-                      
+          segmentFeaturePool(uemID,chunks,segID);
+
           for(int i=0;i<SECOND_RUN;i++)
           {
-          
+
             speechG+=2;
             garG   +=2;
             silG   ++;
-    
+
             PRINTF5("Second run iteration %d.. %d - %d - %d\n",i,silG,garG,speechG);
-                    
+
             if(garbageModel != NULL)
             {
               if(featurePool->getClusterLength(segID,3) < MIN_DATA)
@@ -572,7 +572,7 @@ ShoutSegment::ShoutSegment(char *featureFile, FILE *amFile, char *rttmOut, char 
                 createLexicalTree(100, forEachModel1, NULL);
               }
               else
-              {        
+              {
                 garbageModel->setTrainingData(featurePool,segID,3);
                 trainModel(garbageModel,garG,(silModel==NULL && speechModel == NULL));
               }
@@ -586,9 +586,9 @@ ShoutSegment::ShoutSegment(char *featureFile, FILE *amFile, char *rttmOut, char 
             {
               speechModel->setTrainingData(featurePool,segID,2);
               trainModel(speechModel,speechG,true);
-            }        
+            }
             featurePool->resetSegmentation(segID);
-            segmentFeaturePool(uemID,chunks,segID);    
+            segmentFeaturePool(uemID,chunks,segID);
           }
           // Okay, now look if we should keep this garbage model:
           if(garbageModel != NULL)
@@ -634,20 +634,20 @@ ShoutSegment::ShoutSegment(char *featureFile, FILE *amFile, char *rttmOut, char 
           segmentFeaturePool(uemID,chunks,segID);
           doSAD_noGarbage(featurePool,segID,silID,speechID,chunks);
         }
-      }    
+      }
       else
       {
         doSAD_noGarbage(featurePool,segID,silID,speechID,chunks);
       }
-      
+
       PRINTF("Starting post-processing...\n");
   //    createLexicalTree(100, forEachModelFinal, NULL);
   //    featurePool->resetSegmentation(segID);
-  //    segmentFeaturePool(uemID,chunks,segID);    
-  //    featurePool->filterShortSegments(segID,2,1,MIN_SPEECH-1);    
+  //    segmentFeaturePool(uemID,chunks,segID);
+  //    featurePool->filterShortSegments(segID,2,1,MIN_SPEECH-1);
       PRINTF("  filter short SIL segments.\n");
       featurePool->filterShortSegments(segID,3,1,MIN_GARBAGE-1);
-  
+
       PRINTF("  delete models.\n");
       assert(silModel != orgSil);
       assert(speechModel != orgSpeech);
@@ -694,7 +694,7 @@ ShoutSegment::ShoutSegment(char *featureFile, FILE *amFile, char *rttmOut, char 
     }
 
     PRINTF("  delete original (SIL/SPEECH) models.\n");
-  
+
     if(orgSil != NULL)
     {
       delete orgSil;
@@ -732,12 +732,12 @@ void ShoutSegment::doSAD_noGarbage(FeaturePool *featurePool, int segID, int silI
   int silG    = 2;
   int speechG = 2;
   MINPASSES   = 8;
-  
+
   TrainPhoneModel *silModel     = new TrainPhoneModel("SIL",   1,1,true,featurePool->getVectorSize());
   TrainPhoneModel *speechModel  = new TrainPhoneModel("SPEECH",1,1,true,featurePool->getVectorSize());
   featurePool->segmentationSubset(segID,silID,   1,phoneModels[1],200*SAMPLE_PER_GAUSSIAN);
   featurePool->segmentationCopy(segID,speechID);
-  
+
   silModel->setTrainingData(featurePool,silID,1);
   speechModel->setTrainingData(featurePool,speechID,2);
   int silSize    = featurePool->getClusterLength(silID,1);
@@ -747,7 +747,7 @@ void ShoutSegment::doSAD_noGarbage(FeaturePool *featurePool, int segID, int silI
   trainModel(speechModel,speechG,true);
   phoneModels[1] = ((PhoneModel*)silModel);
   phoneModels[2] = ((PhoneModel*)speechModel);
-  
+
   featurePool->resetSegmentation(segID);
   segmentFeaturePool(uemID,chunks,segID);
   if(featurePool->getClusterLength(segID,2) > MIN_DATA)
@@ -755,7 +755,7 @@ void ShoutSegment::doSAD_noGarbage(FeaturePool *featurePool, int segID, int silI
     featurePool->segmentationSubset(segID,silID,   1,phoneModels[1],  SAMPLE_PER_GAUSSIAN);
     featurePool->segmentationSubset(segID,speechID,2,phoneModels[2],  SAMPLE_PER_GAUSSIAN);
     delete silModel;
-    delete speechModel;            
+    delete speechModel;
     silModel     = new TrainPhoneModel("SIL",   1,1,true,featurePool->getVectorSize());
     speechModel  = new TrainPhoneModel("SPEECH",1,1,true,featurePool->getVectorSize());
     silModel->setTrainingData(featurePool,silID,1);
@@ -766,8 +766,8 @@ void ShoutSegment::doSAD_noGarbage(FeaturePool *featurePool, int segID, int silI
     phoneModels[2] = ((PhoneModel*)speechModel);
     featurePool->resetSegmentation(segID);
     segmentFeaturePool(uemID,chunks,segID);
-  
-    
+
+
     for(int i2=0;i2<7;i2++)
     {
       silModel->setTrainingData(featurePool,segID,1);
@@ -776,8 +776,8 @@ void ShoutSegment::doSAD_noGarbage(FeaturePool *featurePool, int segID, int silI
       trainModel(speechModel,speechG,true);
 
       featurePool->resetSegmentation(segID);
-      segmentFeaturePool(uemID,chunks,segID);            
-    
+      segmentFeaturePool(uemID,chunks,segID);
+
       if(i2<5)
       {
         speechG+=2;

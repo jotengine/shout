@@ -1316,7 +1316,7 @@ double TrainPhoneModel::train(int maxGaussians, bool isS, bool neverPrune, Vecto
           /* Train */
           bool isLast   = false;
           bool inFilter = true;
-
+          PRINTF("******** PROCEEDING");
           bool vectorNotNull = true;
           Vector *trainVector = trainingPool->getFirstVectorFirstSegment(&readPool_curSeg,trainingSegment,useLabel,useLabel < 0, &isLast, &inFilter);
           vectorNotNull = (trainVector != NULL);
@@ -1455,7 +1455,7 @@ double TrainPhoneModel::train(int maxGaussians, bool isS, bool neverPrune, Vecto
 
       PRINTF6("# %s (SINGLE-STATE,%d) Training in progress: %d - %12f (%d)\n",statistics.name,pass2, nrOfG,statistics.likelihood,count);
 
-//      writeModel(modelFile);
+     // writeModel(modelFile);
 
       // If still allowed, double the gaussians for each state and train again!
       // (Because gaussians may be deleted as well, check if the number of gaussians is bigger than last time..
@@ -1492,7 +1492,7 @@ double TrainPhoneModel::train(int maxGaussians, bool isS, bool neverPrune, Vecto
   }
   else    ////////// ----------> This is NOT a SIL model:
   {
-//    printf("Going to train a TRI-PHONE model.. (%d) \n", nrOfG);
+   // printf("Going to train a TRI-PHONE model.. (%d) \n", nrOfG);
     // Do we need to initialise the model?
     if(nrOfG < 2)
     {
@@ -2003,7 +2003,7 @@ double TrainPhoneModel::train(int maxGaussians, bool isS, bool neverPrune, Vecto
         statistics.likelihood          = likelihood_new;
         statistics.nrOfGaussians       = maxNrOfGaussians();
         nrOfG                          = statistics.nrOfGaussians;
-//        printf("Should we split? lastNrOfGaussians = %d, nrOfG = %d, maxGaussians = %d\n",lastNrOfGaussians,nrOfG,maxGaussians);
+       // printf("Should we split? lastNrOfGaussians = %d, nrOfG = %d, maxGaussians = %d\n",lastNrOfGaussians,nrOfG,maxGaussians);
         if(lastNrOfGaussians < nrOfG && nrOfG < maxGaussians)
         {
           lastNrOfGaussians = nrOfG;
@@ -2088,7 +2088,7 @@ double TrainPhoneModel::train(int maxGaussians, bool isS, bool neverPrune, Vecto
         }
         // If still allowed, increase the gaussians for each state and train again!
         // (Because gaussians may be deleted as well, check if the number of gaussians is bigger than last time..
-//        printf("Should we split? lastNrOfGaussians = %d, nrOfG = %d, maxGaussians = %d\n",lastNrOfGaussians,nrOfG,maxGaussians);
+        // printf("Should we split? lastNrOfGaussians = %d, nrOfG = %d, maxGaussians = %d\n",lastNrOfGaussians,nrOfG,maxGaussians);
         if(lastNrOfGaussians < nrOfG && nrOfG < maxGaussians)
         {
           lastNrOfGaussians = nrOfG;
