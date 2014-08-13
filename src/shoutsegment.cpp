@@ -74,7 +74,6 @@ void *thread_train( void *ptr )
 
     PRINTF3("Thread %d is training (%p)...\n",data->id,data->model); fflush(stdout);
     data->model->train(data->nr,true);
-
     pthread_mutex_lock( &condition_shoutsegment_mutexDone);
     shoutsegment_threadRunning[data->id] = false;
     pthread_cond_signal( &condition_shoutsegment_threadDone);
@@ -174,16 +173,20 @@ int main(int argc, char *argv[])
   }
 #ifdef MAX_NR_THREADS
   int max = 3;
+  PRINTF("Max threads defined\n");
   if(MAX_NR_THREADS < 3)
   {
     max = MAX_NR_THREADS;
   }
   for(int i=0;i<max;i++)
   {
+    PRINTF2("Inside thread loop %i\n",i);
     shoutsegment_threadRunning[i]   = false;
     shoutsegment_threadMayStart[i]  = false;
     trainThread[i].id  = i;
     pthread_create( &shoutsegment_thread[i], NULL, thread_train, (void*) &trainThread[i]);
+    PRINTF("Outside of thread creation...\n");
+    fflush(stdout);
   }
 #endif
   ShoutSegment ShoutSegment(myConfig.getStringValue(ARGUMENT_AUDIOFILE), modelFile, myConfig.getStringValue(ARGUMENT_META_OUT),
@@ -192,6 +195,8 @@ int main(int argc, char *argv[])
                             myConfig.getStringValue(ARGUMENT_CTS_IN),
                             myConfig.getStringValue(ARGUMENT_CTS_OUT),
                             myConfig.parIsDefined(ARGUMENT_ENERGY_BASED));
+  PRINTF("ShoutSegment created\n...");
+  fflush(stdout);
   return 0;
 }
 
@@ -220,7 +225,8 @@ ShoutSegment::ShoutSegment(char *featureFile, FILE *amFile, char *rttmOut, char 
     USER_ERROR("Sorry, widening segments after SAD is not implemented yet!");
   }
 
-
+  PRINTF("Creating ShoutSegment...\n");
+  fflush(stdout);
   SegmentationAdmin segmentList;
   bool performCTS = (ctsInName != NULL && strlen(ctsInName) > 0);
 
@@ -641,10 +647,10 @@ ShoutSegment::ShoutSegment(char *featureFile, FILE *amFile, char *rttmOut, char 
       }
 
       PRINTF("Starting post-processing...\n");
-  //    createLexicalTree(100, forEachModelFinal, NULL);
-  //    featurePool->resetSegmentation(segID);
-  //    segmentFeaturePool(uemID,chunks,segID);
-  //    featurePool->filterShortSegments(segID,2,1,MIN_SPEECH-1);
+     // createLexicalTree(100, forEachModelFinal, NULL);
+     // featurePool->resetSegmentation(segID);
+     // segmentFeaturePool(uemID,chunks,segID);
+     // featurePool->filterShortSegments(segID,2,1,MIN_SPEECH-1);
       PRINTF("  filter short SIL segments.\n");
       featurePool->filterShortSegments(segID,3,1,MIN_GARBAGE-1);
 
