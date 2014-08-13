@@ -1316,7 +1316,7 @@ double TrainPhoneModel::train(int maxGaussians, bool isS, bool neverPrune, Vecto
           /* Train */
           bool isLast   = false;
           bool inFilter = true;
-          PRINTF("******** PROCEEDING");
+          // PRINTF("******** PROCEEDING");
           bool vectorNotNull = true;
           Vector *trainVector = trainingPool->getFirstVectorFirstSegment(&readPool_curSeg,trainingSegment,useLabel,useLabel < 0, &isLast, &inFilter);
           vectorNotNull = (trainVector != NULL);
@@ -1453,13 +1453,30 @@ double TrainPhoneModel::train(int maxGaussians, bool isS, bool neverPrune, Vecto
       statistics.nrOfGaussians = r;
       nrOfG = statistics.nrOfGaussians;
 
+      PRINTF("Right before 'training in progress'...\n");
       PRINTF6("# %s (SINGLE-STATE,%d) Training in progress: %d - %12f (%d)\n",statistics.name,pass2, nrOfG,statistics.likelihood,count);
+      PRINTF("Right after 'training in progress'...\n");
 
      // writeModel(modelFile);
 
       // If still allowed, double the gaussians for each state and train again!
       // (Because gaussians may be deleted as well, check if the number of gaussians is bigger than last time..
-      if(lastNrOfGaussians < nrOfG && nrOfG < maxGaussians)
+      PRINTF("bkah\n");
+      PRINTF2("nrOfG: %i\n", nrOfG);
+      PRINTF2("maxGaussians: %i\n", maxGaussians);
+      PRINTF2("lastNrOfGaussians: %i\n", lastNrOfGaussians);
+      PRINTF("bkah2\n");
+
+      bool proceed2 = nrOfG < maxGaussians;
+      PRINTF2("Proceed2? %s\n", proceed2 ? "true" : "false");
+
+      bool proceed1 = lastNrOfGaussians < nrOfG;
+      PRINTF2("Proceed1? %s\n", proceed1 ? "true" : "false");
+
+      bool proceed = proceed1 && proceed2;
+      PRINTF2("Proceed total? %s\n", proceed ? "true" : "false");
+
+      if(proceed)
       {
         PRINTF("Start splitting procedure...\n");
         lastNrOfGaussians = nrOfG;
@@ -1483,11 +1500,17 @@ double TrainPhoneModel::train(int maxGaussians, bool isS, bool neverPrune, Vecto
         }
         statistics.nrOfGaussians = r;
         nrOfG = statistics.nrOfGaussians;
+        PRINTF("Finished splitting procedure...\n");
+        fflush(stdout);
       }
       else
       {
+        PRINTF("Trying to stop proceedDoubling");
+        fflush(stdout);
         proceedDoubling = false;
       }
+      PRINTF("SKIP THIS SHIT\n");
+      fflush(stdout);
     }
   }
   else    ////////// ----------> This is NOT a SIL model:
